@@ -1,4 +1,4 @@
-# Тестовый playbook для развёртывания домена на windows сервер
+# Тестовый playbook для развёртывания домена на windows server
 
 - name: Install AD
   hosts: control
