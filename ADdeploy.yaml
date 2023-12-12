@@ -12,7 +12,7 @@
      - name: Rename Server
        ansible.windows.win_powershell:
           script: |
-            Rename-Computer -NewName {{ comp_name }} -Restart -Force
+            Rename-Computer -NewName {{ comp_name_set }} -Restart -Force
        tags: rename
 
      - name: Enable and install windows-domain modules
