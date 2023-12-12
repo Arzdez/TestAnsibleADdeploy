@@ -46,38 +46,3 @@
             netsh interface ipv4 set address name=Ethernet source=static address={{ domain_ip }} gateway={{ gateAway }} store=persistent
             Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses ("127.0.0.1")
        tags: set_ip
-
-
-- name: Install AD with ansible modules
-  hosts: control
-  tags: Run_module
-
-  tasks:
-     - name: Check_connect
-       ansible.windows.win_ping:
-       tags: ping
-
-     - name: Rename Server
-       ansible.windows.win_powershell:
-          script: |
-            Rename-Computer -NewName {{ comp_name_set }} -Restart -Force
-       tags: rename
-
-     - name: AD deploy
-       microsoft.ad.domain:
-          create_dns_delegation: false
-          database_path: C:\Windows\NTDS
-          dns_domain_name: "{{ domain_name_set }}"
-          domain_netbios_name: "{{ netBiosName_set }}"
-          domain_mode: "{{ domain_mode_set }}"
-          forest_mode: "{{ forest_mode_set }}"
-          safe_mode_password: "{{ admin_password_set }}"
-          sysvol_path: C:\Windows\SYSVOL
-          reboot: true
-
-     - name: Set static ip and dns
-       ansible.windows.win_powershell:
-          script: |
-            netsh interface ipv4 set address name=Ethernet source=static address={{ domain_ip }} gateway={{ gateAway }} store=persistent
-            Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses ("127.0.0.1")
-       tags: set_ip
