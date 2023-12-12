@@ -1,0 +1,25 @@
+#Хосты
+[control]
+10.0.3.5
+
+
+
+[control:vars]
+ansible_port = 5985
+ansible_user = login
+ansible_password = pass
+ansible_connection = winrm
+ansible_winrm_scheme = http
+ansible_winrm_transport = basic
+
+#Доменные переменные
+domain_ip = ip
+gateAway = gateAway
+
+comp_name_set = "DC1"
+forest_mode_set = "WinThreshold"
+domain_mode_set = "WinThreshold"
+domain_name_set = "test.com"
+admin_password_set = "passs"
+netBiosName_set = "test-DC1"
+
